@@ -1,5 +1,6 @@
-export function closeModal(element) {
-    element.classList.remove('popup_is-opened'); // функция закрытия попапа
+export function closeModal(popup) {
+    popup.classList.remove('popup_is-opened'); // функция закрытия попапа
+    document.removeEventListener('keydown', closeEscKey);
 }
 
 export function closeEscKey(evt) {
@@ -23,4 +24,5 @@ export function closeButton(evt) {
 
 export function openModal(popup){
     popup.classList.add('popup_is-opened', 'popup_is-animated'); // функция открытия попапа
+    document.addEventListener('keydown', closeEscKey);
 }
