@@ -40,7 +40,7 @@ const cardNameInput = document.querySelector('.popup__input_type_card-name');
 const cardLinkInput = document.querySelector('.popup__input_type_url');
 
 profileAddButton.addEventListener('click', function(evt) {
-    openModal(popupAddCard)
+    openModal(popupAddCard);
 }) // повесили слушатель на кнопку
 
 initialCards.forEach((card) => {
