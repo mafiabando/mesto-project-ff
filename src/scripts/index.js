@@ -52,7 +52,7 @@ function addCardSubmit(evt) {
     evt.preventDefault();
     const name = cardNameInput.value;
     const link = cardLinkInput.value;
-    const newCard = createCard(link, name);
+    const newCard = createCard(link, name, openImagePopup);
     addCard(newCard);
     addCardForm.reset();
     closeModal(popupAddCard);
