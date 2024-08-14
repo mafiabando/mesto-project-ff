@@ -26,6 +26,8 @@ function createCard(
     cardDeleteButton.addEventListener("click", () => {
       deleteCard(card, cardId);
     });
+  } else {
+    cardDeleteButton.remove()
   }
   cardImage.addEventListener("click", () => openImagePopup(name, link));
 

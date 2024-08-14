@@ -39,7 +39,7 @@ const popupEditProfileImage = document.querySelector(".popup_type_avatar");
 const popupCardImage = document.querySelector(".popup_type_image");
 const popupImageCaption = document.querySelector(".popup__caption");
 const popupImage = document.querySelector(".popup__image");
-const button = document.querySelector(".button");
+const popups = document.querySelectorAll('.popup')
 
 profileImage.addEventListener("click", (evt) => {
   openModal(popupEditProfileImage);
@@ -48,7 +48,7 @@ profileImage.addEventListener("click", (evt) => {
 
 formEditProfileImage.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  button.textContent = "Сохранение...";
+  popupEditProfileImage.querySelector(".button").textContent = "Сохранение...";
   patchProfileImg(formEditProfileImage.link.value)
     .then(() => {
       profileImage.style.backgroundImage = `url(${formEditProfileImage.link.value})`;
@@ -130,24 +130,23 @@ addCardForm.addEventListener("submit", (evt) => {
 
 // Popup
 
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_is-opened')) {
+          closeModal(popup)
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        closeModal(popup)
+      }
+  })
+})
+
 function openImagePopup(name, link) {
   openModal(popupCardImage);
   popupImage.src = link;
   popupImage.alt = name;
   popupImageCaption.textContent = name;
 }
-
-popupEditProfile.addEventListener("mousedown", closeOverlay); // повесили слушатель на клик по оверлею
-popupEditProfile.addEventListener("click", closeButton); // повесили слушатель на кнопку
-
-popupAddCard.addEventListener("mousedown", closeOverlay); // повесили слушатель на клик по оверлею
-popupAddCard.addEventListener("click", closeButton); // повесили слушатель на кнопку
-
-popupCardImage.addEventListener("mousedown", closeOverlay); // повесили слушатель на клик по оверлею
-popupCardImage.addEventListener("click", closeButton); // повесили слушатель на кнопку
-
-popupEditProfileImage.addEventListener("mousedown", closeOverlay); // повесили слушатель на клик по оверлею
-popupEditProfileImage.addEventListener("click", closeButton); // повесили слушатель на кнопку
 
 const validationConfig = {
   formSelector: ".popup__form",

@@ -14,70 +14,70 @@ const handleData = (res) => {
 }; // обработка ответа от сервера
 
 const getUserRequest = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
+  return request(`${config.baseUrl}/users/me`, {
     method: "GET",
     headers: config.headers,
-  }).then(handleData);
+  });
 }; // получение данных пользователя
 
 const getCardsRequest = () => {
-  return fetch(`${config.baseUrl}/cards`, {
+  return request(`${config.baseUrl}/cards`, {
     method: "GET",
     headers: config.headers,
-  }).then(handleData);
+  });
 }; // получение карточек
 
 const postCard = (name, link) => {
-  return fetch(`${config.baseUrl}/cards`, {
+  return request(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify({
       name: name,
       link: link,
-    }),
-  }).then((res) => res.json());
+    })
+  });
 }; // добавление новой карточки
 
 const patchProfile = (name, about) => {
-  return fetch(`${config.baseUrl}/users/me`, {
+  return request(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       name: name,
       about: about,
-    }),
-  }).then(handleData);
+    })
+  })
 }; // редактирование профиля
 
 const patchProfileImg = (link) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
+  return request(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       avatar: link,
-    }),
-  }).then(handleData);
+    })
+  })
 }; // редактирование аватарки профиля
 
 const deleteCardApi = (id) => {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
+  return request(`${config.baseUrl}/cards/${id}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then(handleData);
+  });
 }; // удаление карточки
 
 const addLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  return request(`${config.baseUrl}/cards/likes/${id}`, {
     method: "PUT",
     headers: config.headers,
-  }).then(handleData);
+  });
 };
 
 const removeLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+  return request(`${config.baseUrl}/cards/likes/${id}`, {
     method: "DELETE",
     headers: config.headers,
-  }).then(handleData);
+  });
 };
 
 export {
@@ -91,3 +91,7 @@ export {
   addLike,
   removeLike,
 };
+
+function request(url, options) {
+  return fetch(url, options).then(handleData)
+}
